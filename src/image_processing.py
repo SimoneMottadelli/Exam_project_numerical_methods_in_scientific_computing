@@ -1,7 +1,7 @@
 # This module contains the logic for processing the image in input
 
 from tqdm import tqdm
-from scipy_wrapper import lib_idct2, lib_dct2
+from scipy import fft
 
 
 # This function is used to cutoff the frequencies of the Minimum Coded Unit (MCU), that is to set
@@ -47,9 +47,9 @@ def process_image(img_to_process, f, d):
 
             # if the mcu is a FxF square matrix, then compress the mcu
             if mcu.shape[0] == f and mcu.shape[1] == f:
-                mcu = lib_dct2(mcu)
+                mcu = fft.dctn(mcu, type=2, norm="ortho")
                 mcu = cutoff_frequencies(mcu, d)
-                mcu = lib_idct2(mcu)
+                mcu = fft.idctn(mcu, type=2, norm="ortho")
                 mcu = adjust_coefficients(mcu)
 
             # save the processed mcu in its original position inside the matrix representing the image being processed

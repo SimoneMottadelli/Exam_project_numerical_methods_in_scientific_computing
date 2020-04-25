@@ -1,7 +1,7 @@
 # This module implements the comparison between my implementation of the dct2 function and the one provided by the
 # scipy library
 
-from scipy_wrapper import lib_dct2
+from scipy import fft
 from my_dct2 import my_dct2
 from results import plot_results, save_results_on_file
 import numpy as np
@@ -45,7 +45,7 @@ def compare(max_dim, step):
 
         # execute the dct2 of the library on the generated matrix and compute the execution time
         start_execution_time = time.time()
-        lib_dct2(m)
+        fft.dctn(m, type=2, norm="ortho")
         end_execution_time = time.time()
         lib_time.append(end_execution_time - start_execution_time)
 
@@ -55,7 +55,7 @@ def compare(max_dim, step):
 def test():
     m = np.loadtxt("../mat.txt")
     c1 = my_dct2(m)
-    c2 = lib_dct2(m)
+    c2 = fft.dctn(m, type=2, norm="ortho")
     print(c1)
     print("\n\n")
     print(c2)
@@ -63,6 +63,7 @@ def test():
         print("[XXX --- TEST FAILED]")
     else:
         print("[OK --- TEST PASSED]")
+    print(fft.idctn(c2, type=2, norm="ortho"))
 
 
 def main(argv):

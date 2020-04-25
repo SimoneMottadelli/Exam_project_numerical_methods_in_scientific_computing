@@ -16,7 +16,7 @@ def parse_arguments(argv):
     f = int(argv[1])
     d = int(argv[3])
 
-    # check whetehr the value of "d" is contained in the [0, 2 * F - 2] interval
+    # check whether the value of "d" is contained in the [0, 2 * F - 2] interval
     if d < 0 or d > (2 * f - 2):
         throw_error_msg()
 
