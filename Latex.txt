@@ -1,0 +1,123 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, top=30mm, bottom=30mm, left=20mm, right=20mm]{geometry}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{soul}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pythonhighlight}
+\usepackage{graphicx}
+\newcommand{\pyobject}[1]{\ovalbox{\color{red}{\texttt{#1}}}}
+\title{\Huge Metodi Del Calcolo Scientifico - Project 2 \\ \Large Academic Year 2019/2020}
+\author{Simone Paolo Mottadelli, 820786}
+
+
+
+\date{}
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\large
+\section{Introduction}
+\label{sec:introduction}
+The main purpose of this project was to use the Discrete Cosine Transform 2 (\textbf{DCT2}) implementation in an open source environment in order to assess the effects of a compression algorithm on gray scale images. \\
+In particular, this report consists of two parts. The first one describes a possible implementation of the DCT2 as presented during the lectures and shows the results obtained from the comparison between such implementation and the one provided by a an open source library in terms of computational complexity, while the second part focuses on the implementation of a compression algorithm for gray scale images, which does not use a quantization matrix but is very similar to the JPEG algorithm.
+\section{First part}
+\label{sec:firstpart}
+The first part of the project has been implemented using the \textbf{Python} \cite{van1995python} programming language because it is open source, very powerful and it provides all the functionalities and libraries needed to achieve the goals of the project. More in detail, three libraries have been used:
+\begin{itemize}
+    \item \textbf{SciPy} \cite{2020SciPy-NMeth}, which is a Python-based ecosystem of open-source software for mathematics, science and engineering. It contains a fast implementation of the DCT2;
+    \item \textbf{NumPy} \cite{numpy}, which is the core library for scientific computing in Python and which mainly adds support for multidimensional arrays;
+    \item \textbf{Matplotlib} \cite{Hunter:2007}, which is a comprehensive library for creating static, animated and interactive visualizations in Python \cite{van1995python}.
+\end{itemize}
+The code has been organized into three modules:
+\begin{itemize}
+    \item \textbf{my\_dct2.py}, containing my implementation of the DCT2;
+    \item \textbf{comparator.py}, containing the logic to compare my DCT2 implementation with the one of the SciPy library;
+    \item \textbf{results.py}, containing the logic to save the results of the comparison on a file and plot the results.
+\end{itemize}
+Note that in order not to make this report too complicated and technical, only the module containing my implementation of the DCT2 will be described in depth, while for the other modules, just a brief description will be provided. However, all the code is available at \url{https://github.com/SimoneMottadelli/MetodiDelCalcoloScientifico}
+\subsection{Implementation of the DCT2}
+\label{subsec:implementation_of_my_dct2}
+The \textbf{my\_dct2.py} module contains my implementation of the DCT2, which has been realized by applying the DCT1 first on the rows and then on the columns of the matrix in input. This design choice is related to the fact that the "brute-force" implementation of the DCT2 using the following formula has a time complexity equals to $O(n^{4})$:
+$$c_{kl} = \frac{1}{\sqrt{\alpha_k}\sqrt{\alpha_l}}\sum_{i=1}^{n}\sum_{j=1}^{n} cos\left(\pi k \frac{2i-1}{2n}\right) cos\left(\pi l \frac{2j-1}{2n}\right)m_{ij}$$ 
+where $$c, m \in \mathbb{R}^{n\times n} \:\:\:\:\:\: \text{and} \:\:\:\:\:\:
+\alpha_k = \begin{cases} 
+      n & k = 0 \\
+      \frac{n}{2} & k\neq 0
+   \end{cases}
+$$
+Instead, applying the DCT1 with the following formulas on the matrix in input, first on its rows and then on its columns, has a time complexity equals to $O(n^{3})$:
+$$c_k = \frac{1}{\sqrt{\alpha_k}}\sum_{i=1}^{n}cos\left(\pi k \frac{2i-1}{2n}\right)m_i$$ 
+where $$c, m \in \mathbb{R}^{n} \:\:\:\:\:\: \text{and} \:\:\:\:\:\:
+\alpha_k = \begin{cases} 
+      n & k = 0 \\
+      \frac{n}{2} & k\neq 0
+   \end{cases}
+$$
+Concerning the code, Figure \ref{fig:my_dct2} shows the content of the \textbf{my\_dct2.py} module. In particular, it contains two functions:
+\begin{itemize}
+    \item \textbf{my\_dct(m)}, which receives an \textbf{m} matrix in input and simply computes the DCT1 for each row of \textbf{m};
+    \item \textbf{my\_dct2(m)}, which receives an \textbf{m} matrix in input and calls \textbf{my\_dct(m)} twice, first on \textbf{m} and then on the resulting transposed matrix.
+\end{itemize}
+\newpage
+\begin{figure}
+    \centering
+    \begin{python}
+import numpy as np
+from math import cos, sqrt
+
+# input: m (a numpy matrix)
+def my_dct(m):
+    nrows = m.shape[0]
+    ncols = m.shape[1]
+    c = np.zeros((nrows, ncols))
+    for row in range(0, nrows):
+        for k in range(0, ncols):
+            total_sum = 0
+            for i in range(1, ncols + 1):
+                total_sum += cos(np.pi * k * (2 * i - 1) / (2 * ncols)) * 
+                              m[row][i - 1]
+            alpha_k = ncols if k == 0 else ncols * 0.5
+            
+            c[row][k] = total_sum / sqrt(alpha_k)
+    return c
+
+# input: m (a numpy matrix)
+def my_dct2(m):
+    return my_dct(my_dct(m).transpose()).transpose()
+\end{python}
+    \caption{My DCT2 implementation}
+    \label{fig:my_dct2}
+\end{figure}
+\subsection{Comparison with the SciPy library}
+After having implemented the DCT2 as described in Subsection \ref{subsec:implementation_of_my_dct2}, an empirical evaluation study has been conducted with the aim of comparing my DCT2 implementation with the one provided by the SciPi \cite{2020SciPy-NMeth} library in terms of their computational complexity. \\ 
+First of all, the two algorithms have been executed with square matrices of increasing dimension and their executing time has been registered. This has been achieved by implementing the code inside the \textit{comparator.py} module, whose logic is very simple:
+\begin{enumerate}
+    \item It generates a random matrix of dimension $N\times N$
+    \item It registers the execution time of my DCT2 algorithm
+    \item It registers the execution time of the DCT2 of the SciPy library
+    \item it returns to step 1 until the maximum predetermined dimension of the matrices has been reached
+\end{enumerate}
+To conduce the experiments, the maximum predetermined dimension of the matrices has been set to $N = 1000$ and the results have been collected using the \textbf{results.py} module, containing the logic for saving the results of each experiment on a file and for plotting the results on a semi-logarithmic scale.\\
+Note that the actual execution time of an algorithm is strongly influenced by the scheduler of the operating system, which decides how much CPU time to allocate to each process. To mitigate this problem, 3 runs of the experiments have been conducted and the merged results are shown in Figure \ref{}. In particular, the plot shows that my implementation of the DCT2 has a cubic time complexity, while the algorithm provided by the SciPy \cite{2020SciPy-NMeth} library is much more efficient, since it provides a faster implementation of the DCT2 (\textbf{FFT}). In addition, it is possible to see that the curve generated by the algorithm of the SciPy \cite{2020SciPy-NMeth} library is much more irregular and this may depend on its actual implementation.
+\section{Second part}
+This second part of the project has also been implemented using the Python \cite{van1995python} programming language for the same reasons described in Section \ref{sec:firstpart}. \\
+Moreover, since this part of the project required to work on \textbf{.bmp} images, an additional library, \textbf{Pillow} \cite{pillow}, has been used for opening and manipulating the images in input. \\
+From an architectural point of view, the software has been organized into the following modules:
+\begin{itemize}
+    \item \textbf{main.py}, which is the entry point of the software;
+    \item \textbf{input\_parser.py}, which implements the logic for parsing the user input, that is, the \textbf{F} and \textbf{d} parameter as well as the \textbf{path} in the file system of where the image file is located;
+    \item \textbf{image\_processing.py}, which implements the core of the compression algorithm for the gray scale images;
+    \item \textbf{results.py}, which realizes the logic for showing the results of the compression algorithm to the user, i.e., it plots the image in input and the compressed image side by side at the end of the execution.
+\end{itemize}
+
+\newpage
+\bibliography{references}
+\bibliographystyle{unsrt}
+\end{document}
