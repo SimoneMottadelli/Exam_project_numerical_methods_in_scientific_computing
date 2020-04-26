@@ -6,7 +6,8 @@ import os
 
 # this function shows an interactive window containing two images side by side
 def display_images(img1, img2):
-    plt.figure()
+    plt.style.use('ggplot')
+    plt.figure("Output")
     plt.subplot(1, 2, 1)
     plt.title('Image before compression')
     plt.imshow(img1, cmap=plt.get_cmap('gray'))
