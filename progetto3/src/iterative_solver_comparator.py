@@ -3,6 +3,7 @@ from numpy.linalg import norm
 from jacobi_solver import JacobiSolver
 from gauss_seidel_solver import GaussSeidelSolver
 from gradient_solver import GradientSolver
+from conjugate_gradient_solver import ConjugateGradientSolver
 import time
 
 
@@ -36,4 +37,6 @@ class IterativeSolverComparator:
             #print("\nGradient solver results with tolerance = " + "{:.0e}".format(tolerance) + ":\n")
             #gradient = GradientSolver(self.A, self.b, tolerance)
             #self.print_results(gradient)
-
+            print("\nConjugate Gradient solver results with tolerance = " + "{:.0e}".format(tolerance) + ":\n")
+            conjugate_gradient = ConjugateGradientSolver(self.A, self.b, tolerance)
+            self.print_results(conjugate_gradient)
