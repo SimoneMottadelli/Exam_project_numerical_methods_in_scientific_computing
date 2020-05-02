@@ -1,5 +1,4 @@
-from numpy import zeros, triu, random, ones
-from numpy.linalg import cond, norm
+from numpy import zeros
 
 
 class ForwardSubstitutionSolver:
@@ -16,13 +15,4 @@ class ForwardSubstitutionSolver:
             x[i] = (self.b[i] - self.A[i,].dot(x)) / self.A[i, i]
         return x
 
-
-if __name__ == '__main__':
-    A = random.triangular((100, 100))
-    A = triu(A)
-    print(cond(A))
-    x = ones(A.shape[0])
-    b = A.dot(x)
-    xapp = ForwardSubstitutionSolver(A, b).solve()
-    print(norm(xapp - x) / norm(x))
 

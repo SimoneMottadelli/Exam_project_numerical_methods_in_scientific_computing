@@ -2,6 +2,7 @@ from numpy import ones
 from numpy.linalg import norm
 from jacobi_solver import JacobiSolver
 from gauss_seidel_solver import GaussSeidelSolver
+from gradient_solver import GradientSolver
 import time
 
 
@@ -11,8 +12,7 @@ class IterativeSolverComparator:
         self.A = A
         self.x_es = ones(A.shape[0])
         self.b = A.dot(self.x_es)
-        #self.tol = [1e-4, 1e-6, 1e-8, 1e-10]
-        self.tol = [1e-15]
+        self.tol = [1e-4, 1e-6, 1e-8, 1e-10]
 
     def print_results(self, solver):
         time_start = time.time()
@@ -27,9 +27,13 @@ class IterativeSolverComparator:
 
     def start_comparison(self):
         for tolerance in self.tol:
-            print("\nJacobi solver results with tolerance = " + "{:.0e}".format(tolerance) + ":\n")
-            jacobi = JacobiSolver(self.A, self.b, tolerance)
-            self.print_results(jacobi)
-            print("\nGauss-Seidel solver results with tolerance = " + "{:.0e}".format(tolerance) + ":\n")
-            gauss = GaussSeidelSolver(self.A, self.b, tolerance)
-            self.print_results(gauss)
+            #print("\nJacobi solver results with tolerance = " + "{:.0e}".format(tolerance) + ":\n")
+            #jacobi = JacobiSolver(self.A, self.b, tolerance)
+            #self.print_results(jacobi)
+            #print("\nGauss-Seidel solver results with tolerance = " + "{:.0e}".format(tolerance) + ":\n")
+            #gauss = GaussSeidelSolver(self.A, self.b, tolerance)
+            #self.print_results(gauss)
+            #print("\nGradient solver results with tolerance = " + "{:.0e}".format(tolerance) + ":\n")
+            #gradient = GradientSolver(self.A, self.b, tolerance)
+            #self.print_results(gradient)
+
