@@ -1,25 +1,19 @@
 """
-This module implements the entry point of the program
+This module implements the entry point of the program and controls the execution flow
 """
 
 import sys
-import os
 from mtx_file_reader import MTXFileReader
 from iterative_solver_comparator import IterativeSolverComparator
-
+from input_parser import Parser
 
 def main(argv):
     # input validation
-    if len(argv) <= 1:
-        print("\n[ERROR] a filepath must be specified in input! Example: python main.py myfile.mtx\n")
-        sys.exit(1)
-    elif not os.path.isfile(argv[1]):
-        print("\n[ERROR] file \"%s\" does not exist in the filesystem!\n" % argv[1])
-        sys.exit(1)
+    mtx_file, sparse = Parser(argv).parse()
 
     # matrix extraction from the .mtx file
-    file_reader = MTXFileReader(argv[1])
-    A = file_reader.load_matrix()
+    file_reader = MTXFileReader(mtx_file)
+    A = file_reader.load_matrix(sparse=sparse)
 
     # launch comparison
     comparator = IterativeSolverComparator(A)
