@@ -10,7 +10,11 @@ class GradientSolver(AbstractIterativeSolver):
 
     # This method computes the next x vector solution using the Gradient update strategy
     def update(self):
+        alpha = self.compute_alpha()
+        return self.x + alpha * self.residual
+
+    # This is a helper function for the update() method and simply computes the value of "alpha"
+    def compute_alpha(self):
         alpha_numerator = self.residual.dot(self.residual)
         alpha_denominator = self.residual.dot(self.A.dot(self.residual))
-        alpha = alpha_numerator / alpha_denominator
-        return self.x + alpha * self.residual
+        return alpha_numerator / alpha_denominator

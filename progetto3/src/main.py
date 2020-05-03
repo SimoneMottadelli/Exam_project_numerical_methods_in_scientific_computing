@@ -5,11 +5,11 @@ This module implements the entry point of the program and controls the execution
 import sys
 from mtx_file_reader import MTXFileReader
 from iterative_solver_comparator import IterativeSolverComparator
-from input_parser import Parser
+from input_parser import InputParser
 
 def main(argv):
     # input validation
-    mtx_file, sparse = Parser(argv).parse()
+    mtx_file, sparse = InputParser(argv).parse()
 
     # matrix extraction from the .mtx file
     file_reader = MTXFileReader(mtx_file)

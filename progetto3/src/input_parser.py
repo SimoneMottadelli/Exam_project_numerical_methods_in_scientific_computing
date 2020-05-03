@@ -5,7 +5,7 @@ This module implements the Parser class, which is responsible of the user input 
 from os.path import isfile
 from sys import exit
 
-class Parser:
+class InputParser:
 
     # Constructor: get the user input from the argv parameter
     def __init__(self, argv):
