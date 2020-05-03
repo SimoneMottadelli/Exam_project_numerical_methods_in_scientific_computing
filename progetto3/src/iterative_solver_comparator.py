@@ -22,7 +22,7 @@ class IterativeSolverComparator:
     # the exact solution x; it initializes the tolerance vector
     def __init__(self, A):
         self.A = A
-        self.x_es = ones(len(A))
+        self.x_es = ones(A.shape[0])
         self.b = A.dot(self.x_es)
         self.tol = [1e-4, 1e-6, 1e-8, 1e-10]
 

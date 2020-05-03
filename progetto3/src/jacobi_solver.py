@@ -14,7 +14,7 @@ class JacobiSolver(AbstractIterativeSolver):
     # residual vector. It is used inside the update() method for computing the next x vector solution
     def __init__(self, A, b, tol):
         super().__init__(A, b, tol)
-        self.P_inv_dot_residual = zeros(len(A))
+        self.P_inv_dot_residual = zeros(A.shape[0])
 
     # This function implements the update strategy of the Jacobi method
     def update(self):

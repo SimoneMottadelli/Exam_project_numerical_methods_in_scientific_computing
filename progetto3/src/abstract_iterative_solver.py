@@ -17,7 +17,7 @@ class AbstractIterativeSolver:
         self.A = A
         self.b = b
         self.tol = tol
-        self.x = zeros(len(A))
+        self.x = zeros(A.shape[0])
         self.max_iter = 20000
         self.current_iter = 1
         self.residual = self.compute_residual()

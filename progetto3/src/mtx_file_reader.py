@@ -4,7 +4,7 @@ specified in input to the program
 """
 
 from numpy import zeros
-
+from scipy.sparse import lil_matrix
 
 class MTXFileReader:
 
@@ -14,14 +14,17 @@ class MTXFileReader:
 
     # This function retrieves and reads the matrix from the filesystem and
     # returns a matrix in output.
-    def load_matrix(self):
+    def load_matrix(self, sparse=True):
         # read the header of the .mtx file
         header = self.mtx_file.readline().split("  ")
 
         # get the matrix dimension from the header
         dim = int(header[0])
 
-        A = zeros((dim, dim))
+        if sparse:
+            A = lil_matrix((dim, dim))
+        else:
+            A = zeros((dim, dim))
 
         # fill the matrix with the coefficients
         for line_in_file in self.mtx_file:
