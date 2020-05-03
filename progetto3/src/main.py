@@ -1,3 +1,7 @@
+"""
+This module implements the entry point of the program
+"""
+
 import sys
 import os
 from mtx_file_reader import MTXFileReader

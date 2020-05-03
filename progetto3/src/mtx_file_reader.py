@@ -1,13 +1,18 @@
-from scipy.sparse import lil_matrix
+"""
+This module implements the MTXFileReader class, which is the class responsible for loading from the .mtx file the matrix
+specified in input to the program
+"""
+
 from numpy import zeros
 
 
 class MTXFileReader:
 
+    # Constructor: it opens the .mtx file from the filesystem
     def __init__(self, filepath):
         self.mtx_file = open(filepath, "r")
 
-    # This function retrieves reads the matrix from the filesystem and
+    # This function retrieves and reads the matrix from the filesystem and
     # returns a matrix in output.
     def load_matrix(self):
         # read the header of the .mtx file
