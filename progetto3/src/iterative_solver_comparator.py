@@ -11,7 +11,7 @@ class IterativeSolverComparator:
 
     def __init__(self, A):
         self.A = A
-        self.x_es = ones(A.shape[0])
+        self.x_es = ones(len(A))
         self.b = A.dot(self.x_es)
         self.tol = [1e-4, 1e-6, 1e-8, 1e-10]
 
@@ -24,19 +24,19 @@ class IterativeSolverComparator:
         print("Relative error = " + "{:.32e}".format(rel_error))
         print("Number of iterations = %d" % num_iter)
         print("Execution time = " + "{:.32e}".format(exec_time))
-        print("\n\n")
+        print("")
 
     def start_comparison(self):
         for tolerance in self.tol:
-            #print("\nJacobi solver results with tolerance = " + "{:.0e}".format(tolerance) + ":\n")
-            #jacobi = JacobiSolver(self.A, self.b, tolerance)
-            #self.print_results(jacobi)
-            #print("\nGauss-Seidel solver results with tolerance = " + "{:.0e}".format(tolerance) + ":\n")
-            #gauss = GaussSeidelSolver(self.A, self.b, tolerance)
-            #self.print_results(gauss)
-            #print("\nGradient solver results with tolerance = " + "{:.0e}".format(tolerance) + ":\n")
-            #gradient = GradientSolver(self.A, self.b, tolerance)
-            #self.print_results(gradient)
-            print("\nConjugate Gradient solver results with tolerance = " + "{:.0e}".format(tolerance) + ":\n")
+            print("\nJacobi solver results with tolerance = " + "{:.0e}".format(tolerance) + ":")
+            jacobi = JacobiSolver(self.A, self.b, tolerance)
+            self.print_results(jacobi)
+            print("\nGauss-Seidel solver results with tolerance = " + "{:.0e}".format(tolerance) + ":")
+            gauss = GaussSeidelSolver(self.A, self.b, tolerance)
+            self.print_results(gauss)
+            print("\nGradient solver results with tolerance = " + "{:.0e}".format(tolerance) + ":")
+            gradient = GradientSolver(self.A, self.b, tolerance)
+            self.print_results(gradient)
+            print("\nConjugate Gradient solver results with tolerance = " + "{:.0e}".format(tolerance) + ":")
             conjugate_gradient = ConjugateGradientSolver(self.A, self.b, tolerance)
             self.print_results(conjugate_gradient)

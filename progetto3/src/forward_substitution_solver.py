@@ -14,5 +14,3 @@ class ForwardSubstitutionSolver:
         for i in range(1, n):
             x[i] = (self.b[i] - self.A[i,].dot(x)) / self.A[i, i]
         return x
-
-
