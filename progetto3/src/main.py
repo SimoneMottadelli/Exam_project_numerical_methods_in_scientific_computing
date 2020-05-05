@@ -12,12 +12,11 @@ def main(argv):
     mtx_file = InputParser(argv).parse()
 
     # matrix extraction from the .mtx file
-    file_reader = MTXFileReader(mtx_file)
-    A = file_reader.load_matrix()
+    A = MTXFileReader(mtx_file).load_matrix()
 
     # launch comparison
-    comparator = IterativeSolverComparator(A)
-    comparator.start_comparison()
+    tols = [1e-4, 1e-6, 1e-8, 1e-10]
+    IterativeSolverComparator(A, tols).start_comparison()
 
 
 if __name__ == '__main__':
