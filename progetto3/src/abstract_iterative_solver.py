@@ -33,10 +33,7 @@ class AbstractIterativeSolver:
         if self.current_iter >= self.max_iter:
             print("[WARNING] max number of iterations reached: solver failed to achieve convergence!")
             return False
-        elif norm(self.residual) / norm(self.b) < self.tol:
-            return False
-        else:
-            return True
+        return norm(self.residual) / norm(self.b) >= self.tol
 
     # Template method for a classical iterative method
     def solve(self):

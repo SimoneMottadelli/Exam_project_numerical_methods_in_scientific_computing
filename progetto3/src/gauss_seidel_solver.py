@@ -3,11 +3,9 @@ This module contains the GussSeidelSolver class, which is a subclass of the Abst
 overrides the method for updating the x solution based on the Gauss-Seidel update strategy
 """
 
-import numpy as np
-import scipy.sparse as sp
+from scipy.sparse import tril
+from scipy.sparse.linalg import spsolve_triangular
 from abstract_iterative_solver import AbstractIterativeSolver
-from forward_substitution_solver import ForwardSubstitutionSolver
-
 
 class GaussSeidelSolver(AbstractIterativeSolver):
 
@@ -16,11 +14,8 @@ class GaussSeidelSolver(AbstractIterativeSolver):
     # computing the next x vector solution
     def __init__(self, A, b, tol):
         super().__init__(A, b, tol)
-        if sp.issparse(A):
-            self.P = sp.tril(self.A, format="lil")
-        else:
-            self.P = np.tril(self.A)
+        self.P = tril(self.A, format="csr")
 
     # This method simply computes the next vector solution x
     def update(self):
-        return self.x + ForwardSubstitutionSolver(self.P, self.residual).solve()
+        return self.x + spsolve_triangular(self.P, self.residual)

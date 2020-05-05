@@ -3,8 +3,8 @@ This module implements the MTXFileReader class, which is the class responsible f
 specified in input to the program
 """
 
-from numpy import zeros
-from scipy.sparse import lil_matrix
+from scipy.sparse import lil_matrix, csr_matrix
+
 
 class MTXFileReader:
 
@@ -14,19 +14,15 @@ class MTXFileReader:
 
     # This function retrieves and reads the matrix from the filesystem and
     # returns a matrix in output.
-    def load_matrix(self, sparse=True):
+    def load_matrix(self):
         # read the header of the .mtx file
         header = self.mtx_file.readline().split("  ")
 
         # get the matrix dimension from the header
         dim = int(header[0])
 
-        if sparse:
-            A = lil_matrix((dim, dim))
-        else:
-            A = zeros((dim, dim))
-
-        # fill the matrix with the coefficients
+        # build the matrix
+        A = lil_matrix((dim, dim))
         for line_in_file in self.mtx_file:
             split_line = line_in_file.split("  ")
             row_index = int(split_line[0])
@@ -34,4 +30,4 @@ class MTXFileReader:
             coefficient = float(split_line[2].strip())
             A[row_index - 1, col_index - 1] = coefficient
 
-        return A
+        return csr_matrix(A)

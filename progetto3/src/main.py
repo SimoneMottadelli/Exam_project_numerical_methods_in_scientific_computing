@@ -9,11 +9,11 @@ from input_parser import InputParser
 
 def main(argv):
     # input validation
-    mtx_file, sparse = InputParser(argv).parse()
+    mtx_file = InputParser(argv).parse()
 
     # matrix extraction from the .mtx file
     file_reader = MTXFileReader(mtx_file)
-    A = file_reader.load_matrix(sparse=sparse)
+    A = file_reader.load_matrix()
 
     # launch comparison
     comparator = IterativeSolverComparator(A)

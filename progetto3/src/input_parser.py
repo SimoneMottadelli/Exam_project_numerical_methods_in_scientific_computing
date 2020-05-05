@@ -20,12 +20,4 @@ class InputParser:
             print("\n[ERROR] file \"%s\" does not exist in the filesystem!\n" % self.argv[1])
             exit(2)
 
-        sparse = True
-        if len(self.argv) == 3 and self.argv[2] == "-dense":
-            print("\n[INFO] matrix format selected: dense.\n")
-            sparse = False
-        else:
-            print("\n[INFO] matrix format selected: sparse. Use \"-dense\" option to change it. Example: "
-                  "python main.py myfile.mtx -dense\n")
-
-        return self.argv[1], sparse
+        return self.argv[1]
