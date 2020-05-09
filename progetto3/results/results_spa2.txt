@@ -1,97 +1,97 @@
 JacobiSolver results with tolerance = 1e-04:
 Relative error = 1.76624651911335707986372423050625e-03
-Number of iterations = 37
-Execution time = 7.79759883880615234375000000000000e-02
+Number of iterations = 36
+Execution time = 7.39684104919433593750000000000000e-02
 
 
 GaussSeidelSolver results with tolerance = 1e-04:
 Relative error = 2.59889558745407490622514323774794e-03
-Number of iterations = 6
-Execution time = 1.46918296813964843750000000000000e-01
+Number of iterations = 5
+Execution time = 1.47916078567504882812500000000000e-01
 
 
 GradientSolver results with tolerance = 1e-04:
 Relative error = 1.81296451171124167744963529003144e-02
-Number of iterations = 162
-Execution time = 5.77670097351074218750000000000000e-01
+Number of iterations = 161
+Execution time = 6.02656841278076171875000000000000e-01
 
 
 ConjugateGradientSolver results with tolerance = 1e-04:
 Relative error = 9.82112845726516511812853593710315e-03
-Number of iterations = 43
-Execution time = 3.22814941406250000000000000000000e-01
+Number of iterations = 42
+Execution time = 3.15820932388305664062500000000000e-01
 
 
 JacobiSolver results with tolerance = 1e-06:
 Relative error = 1.66675613671876165567450195359456e-05
-Number of iterations = 58
-Execution time = 1.09940528869628906250000000000000e-01
+Number of iterations = 57
+Execution time = 1.11959457397460937500000000000000e-01
 
 
 GaussSeidelSolver results with tolerance = 1e-06:
 Relative error = 5.14164125952834566305252317341967e-05
-Number of iterations = 9
-Execution time = 2.38864421844482421875000000000000e-01
+Number of iterations = 8
+Execution time = 2.33869791030883789062500000000000e-01
 
 
 GradientSolver results with tolerance = 1e-06:
 Relative error = 6.69422925385055938782286055754867e-04
-Number of iterations = 1950
-Execution time = 7.26982760429382324218750000000000e+00
+Number of iterations = 1949
+Execution time = 7.27479791641235351562500000000000e+00
 
 
 ConjugateGradientSolver results with tolerance = 1e-06:
 Relative error = 1.19798461785838606394674621391516e-04
-Number of iterations = 123
-Execution time = 9.28470849990844726562500000000000e-01
+Number of iterations = 122
+Execution time = 9.38468456268310546875000000000000e-01
 
 
 JacobiSolver results with tolerance = 1e-08:
 Relative error = 1.57286989521194073727173440291338e-07
-Number of iterations = 79
-Execution time = 1.48920297622680664062500000000000e-01
+Number of iterations = 78
+Execution time = 1.50918722152709960937500000000000e-01
 
 
 GaussSeidelSolver results with tolerance = 1e-08:
 Relative error = 2.79432203477988162142143721555776e-07
-Number of iterations = 13
-Execution time = 3.58796358108520507812500000000000e-01
+Number of iterations = 12
+Execution time = 3.60795497894287109375000000000000e-01
 
 
 GradientSolver results with tolerance = 1e-08:
 Relative error = 6.86524012532387713659415284794818e-06
-Number of iterations = 5088
-Execution time = 1.87292003631591796875000000000000e+01
+Number of iterations = 5087
+Execution time = 1.92289216518402099609375000000000e+01
 
 
 ConjugateGradientSolver results with tolerance = 1e-08:
 Relative error = 5.58666059701413858867521423923197e-07
-Number of iterations = 197
-Execution time = 1.46915435791015625000000000000000e+00
+Number of iterations = 196
+Execution time = 1.48814177513122558593750000000000e+00
 
 
 JacobiSolver results with tolerance = 1e-10:
 Relative error = 1.48427170301443310322459794990853e-09
-Number of iterations = 100
-Execution time = 2.10880041122436523437500000000000e-01
+Number of iterations = 99
+Execution time = 1.99894189834594726562500000000000e-01
 
 
 GaussSeidelSolver results with tolerance = 1e-10:
 Relative error = 5.57074140793959402230002865021551e-09
-Number of iterations = 16
-Execution time = 5.63681125640869140625000000000000e-01
+Number of iterations = 15
+Execution time = 4.45749759674072265625000000000000e-01
 
 
 GradientSolver results with tolerance = 1e-10:
 Relative error = 6.93781477409007825246612614217279e-08
-Number of iterations = 8286
-Execution time = 3.41783101558685302734375000000000e+01
+Number of iterations = 8285
+Execution time = 3.49208910465240478515625000000000e+01
 
 
 ConjugateGradientSolver results with tolerance = 1e-10:
 Relative error = 5.32423046656357218754259498028417e-09
-Number of iterations = 241
-Execution time = 1.97686362266540527343750000000000e+00
+Number of iterations = 240
+Execution time = 1.84793734550476074218750000000000e+00
 
 ***************************************************************************
 *************************** 1e^-4 ************************

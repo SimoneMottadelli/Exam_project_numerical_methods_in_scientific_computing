@@ -19,7 +19,7 @@ class AbstractIterativeSolver:
         self.tol = tol
         self.x = zeros(A.shape[0])
         self.max_iter = 20000
-        self.current_iter = 1
+        self.current_iter = 0
         self.residual = self.compute_residual()
 
     # Helper method to compute the residual, which is used by the stopping criterion
@@ -30,7 +30,7 @@ class AbstractIterativeSolver:
     # must stop to iterate (then it returns FALSE) when the maximum number of iterations is reached or the residual
     # error is less than the tolerance
     def must_continue(self):
-        if self.current_iter >= self.max_iter:
+        if self.current_iter > self.max_iter:
             print("[WARNING] max number of iterations reached: solver failed to achieve convergence!")
             return False
         return norm(self.residual) / norm(self.b) >= self.tol
