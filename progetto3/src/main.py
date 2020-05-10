@@ -7,6 +7,7 @@ from mtx_file_reader import MTXFileReader
 from iterative_solver_comparator import IterativeSolverComparator
 from input_parser import InputParser
 
+
 def main(argv):
     # input validation
     mtx_file = InputParser(argv).parse()

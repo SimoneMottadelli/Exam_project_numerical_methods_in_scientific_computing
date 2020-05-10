@@ -15,10 +15,15 @@ def main():
     my_time_merge = (my_time1 + my_time2 + my_time3 + my_time4) / 4
     lib_time_merge = (lib_time1 + lib_time2 + lib_time3 + lib_time4) / 4
 
+    #cubic_time = 0.000006 * np.array(dim) ** 3
+    #nlogn_time = 0.000006 * np.array(dim) * np.log10(np.array(dim))
+
     plt.style.use("ggplot")
     plt.title("Results of the comparison (semi-logarithmic plot)")
     plt.semilogy(dim, my_time_merge, label="my DCT2")
     plt.semilogy(dim, lib_time_merge, label="DCT2 of the SciPy library")
+    #plt.semilogy(dim, cubic_time, label="cubic time")
+    #plt.semilogy(dim, nlogn_time, label="n*log(n) time")
     plt.legend()
     plt.xlabel("Dimension of the matrix (NxN)")
     plt.ylabel("Time in seconds (log scale)")

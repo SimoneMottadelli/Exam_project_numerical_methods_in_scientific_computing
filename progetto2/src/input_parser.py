@@ -1,7 +1,6 @@
 # This module contains the functions used to validate the user input
 
-import os
-
+from os.path import isfile
 
 # This function parses the arguments in "argv" to check whether the user input is correct and returns the parsed
 # input to the caller method
@@ -24,7 +23,7 @@ def parse_arguments(argv):
     path_to_img = argv[5]
 
     # check whether the image file exists
-    if not os.path.isfile(path_to_img):
+    if not isfile(path_to_img):
         print("[ERROR] File \"%s\" does not exist" % argv[5])
         exit(1)
 

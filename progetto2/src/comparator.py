@@ -4,7 +4,7 @@
 from scipy import fft
 from my_dct2 import my_dct2
 from results import plot_results, save_results_on_file
-import numpy as np
+from numpy.random import randint
 from tqdm import tqdm
 import time
 import sys
@@ -35,7 +35,7 @@ def compare(max_dim, step):
     # start computing the dct2 functions on the matrices at the varying of their dimensions
     for n in tqdm(dim_matrix):
         # generate a random matrix of dimension NxN
-        m = np.random.randint(0, 255, size=(n, n))
+        m = randint(0, 255, size=(n, n))
 
         # execute my dct2 implementation on the generated matrix and compute the execution time
         start_execution_time = time.time()
@@ -52,26 +52,13 @@ def compare(max_dim, step):
     return my_time, lib_time, dim_matrix
 
 
-def test():
-    m = np.loadtxt("../mat.txt")
-    c1 = my_dct2(m)
-    c2 = fft.dctn(m, type=2, norm="ortho")
-    print(c1)
-    print("\n\n")
-    print(c2)
-    if c1.all() != c2.all():
-        print("[XXX --- TEST FAILED]")
-    else:
-        print("[OK --- TEST PASSED]")
-    print(fft.idctn(c2, type=2, norm="ortho"))
-
-
 def main(argv):
     max_dim = int(argv[1])
     step = int(argv[2])
     my_time, lib_time, dim_matrix = compare(max_dim, step)
     plot_results(my_time, lib_time, dim_matrix, step)
     save_results_on_file(my_time, lib_time, dim_matrix, step)
+
 
 if __name__ == '__main__':
     main(sys.argv)
