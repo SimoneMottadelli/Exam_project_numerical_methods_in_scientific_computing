@@ -10,14 +10,14 @@ from input_parser import InputParser
 
 def main(argv):
     # input validation
-    mtx_file = InputParser(argv).parse()
+    mtx_file = InputParser().parse(argv)
 
     # matrix extraction from the .mtx file
-    A = MTXFileReader(mtx_file).load_matrix()
+    A = MTXFileReader().load_matrix(mtx_file)
 
     # launch comparison
     tols = [1e-4, 1e-6, 1e-8, 1e-10]
-    IterativeSolverComparator(A, tols).start_comparison()
+    IterativeSolverComparator().start_comparison(A, tols)
 
 
 if __name__ == '__main__':

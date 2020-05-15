@@ -8,22 +8,21 @@ from scipy.sparse import lil_matrix, csr_matrix
 
 class MTXFileReader:
 
-    # Constructor: it opens the .mtx file from the filesystem
-    def __init__(self, filepath):
-        self.mtx_file = open(filepath, "r")
-
     # This function retrieves and reads the matrix from the filesystem and
     # returns a matrix in output.
-    def load_matrix(self):
+    def load_matrix(self, filepath):
+        # open the .mtx file from the filesystem
+        mtx_file = open(filepath, "r")
+
         # read the header of the .mtx file
-        header = self.mtx_file.readline().split("  ")
+        header = mtx_file.readline().split("  ")
 
         # get the matrix dimension from the header
         dim = int(header[0])
 
         # build the matrix
         A = lil_matrix((dim, dim))
-        for line_in_file in self.mtx_file:
+        for line_in_file in mtx_file:
             split_line = line_in_file.split("  ")
             row_index = int(split_line[0])
             col_index = int(split_line[1])
