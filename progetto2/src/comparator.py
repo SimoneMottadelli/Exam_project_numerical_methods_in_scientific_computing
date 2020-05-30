@@ -56,7 +56,7 @@ def main(argv):
     max_dim = int(argv[1])
     step = int(argv[2])
     my_time, lib_time, dim_matrix = compare(max_dim, step)
-    plot_results(my_time, lib_time, dim_matrix, step)
+    plot_results(my_time, lib_time, dim_matrix)
     save_results_on_file(my_time, lib_time, dim_matrix, step)
 
 
