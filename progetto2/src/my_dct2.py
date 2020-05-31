@@ -5,7 +5,7 @@ from math import cos, sqrt
 
 # This function applies the dct1 function over all the rows of the "mat" matrix in input
 # input: m (a numpy matrix)
-def my_dct(m):
+def my_dct1_on_rows(m):
     nrows = m.shape[0]
     ncols = m.shape[1]
     c = zeros((nrows, ncols)) # matrix containing the result to return
@@ -22,4 +22,4 @@ def my_dct(m):
 # This function implements the dct2 over a matrix
 # input: m (a numpy matrix)
 def my_dct2(m):
-    return my_dct(my_dct(m).transpose()).transpose()
+    return my_dct1_on_rows(my_dct1_on_rows(m).transpose()).transpose()
