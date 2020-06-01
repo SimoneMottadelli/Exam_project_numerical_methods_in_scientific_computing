@@ -14,7 +14,7 @@ import sys
 # the one of the scipy library. In particular, a semi log graph is
 # plotted, where the x-axis represents the dimension of the square matrix
 # processed by the two functions, while the y-axis represents the time in
-# seconds in log scale.
+# milliseconds in log scale.
 # "max_dim" is the maximum dimension of the matrices that will be processed
 # "step" is used to generate the dimensions of the matrices that will be processed
 def compare(max_dim, step):
