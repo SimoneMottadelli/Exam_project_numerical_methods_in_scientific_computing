@@ -27,17 +27,16 @@ class AbstractIterativeSolver:
         return self.b - self.A.dot(self.x)
 
     # Helper method that returns TRUE if the solver must continue to iterate, FALSE otherwise. In particular, the solver
-    # must stop to iterate (then it returns FALSE) when the maximum number of iterations is reached or the residual
-    # error is less than the tolerance
+    # must stop to iterate when the residual error is less than the tolerance
     def must_continue(self):
-        if self.current_iter > self.max_iter:
-            print("[WARNING] max number of iterations reached: solver failed to achieve convergence!")
-            return False
         return norm(self.residual) / norm(self.b) >= self.tol
 
     # Template method for a classical iterative method
     def solve(self):
         while self.must_continue():
+            if self.current_iter >= self.max_iter:
+                print("[WARNING] max number of iterations reached: solver failed to achieve convergence!")
+                break
             self.x = self.update()
             self.residual = self.compute_residual()
             self.current_iter += 1
